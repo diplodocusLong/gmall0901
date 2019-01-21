@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper SYSTEM "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lianglong.gmall.manage.mapper.BaseAttrInfoMapper">
+  <!--  <select  id ="selectAttrInfoList" parameterType="long" resultMap="attrInfoMap">
+        SELECT ba.id,ba.attr_name,ba.catalog3_id,
+        bv.id value_id ,bv.value_name, bv.attr_id FROM
+        base_attr_info ba INNER JOIN  base_attr_value bv  ON ba.id =bv.attr_id
+        where  ba.catalog3_id=#{catalog3Id}
+    </select>-->
+    <select id="selectAttrInfoList" parameterType="long" resultMap="attrInfoMap">
+        select id,attr_name,catalog3_id from
+        base_attr_info where catalog3_id=#{catalog3Id}
+
+    </select>
+    <resultMap id="attrInfoMap" type="com.lianglong.gmall.bean.BaseAttrInfo" autoMapping="true">
+
+        <id column="id" property="id"/>
+        <collection property="attrValueList"  select="com.lianglong.gmall.manage.mapper.BaseAttrValueMapper.selectValueListByAttrId" column="id">
+
+        </collection>
+    </resultMap>
+</mapper>
