@@ -10,4 +10,8 @@ public interface UserService {
     List<UserInfo> getUserInfoList();
 
     List<UserAddress> findUserAddressByUserId(String userId);
+
+    UserInfo login(UserInfo userInfo);
+
+    public UserInfo verify(String userId);
 }

@@ -1,5 +1,6 @@
 package com.lianglong.gmall.manage.service.impl;
 
+
 import com.alibaba.dubbo.config.annotation.Service;
 import com.alibaba.fastjson.JSON;
 import com.lianglong.gmall.bean.*;
@@ -7,6 +8,7 @@ import com.lianglong.gmall.config.RedisUtil;
 import com.lianglong.gmall.manage.constant.ManageConst;
 import com.lianglong.gmall.manage.mapper.*;
 import com.lianglong.gmall.service.ManageService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
 import tk.mybatis.mapper.entity.Example;
@@ -420,6 +422,16 @@ public class ManageServiceImpl implements ManageService {
         List<SkuSaleAttrValue> skuSaleAttrValueList = skuSaleAttrValueMapper.selectSkuSaleAttrValueListBySpu(spuId);
 
         return skuSaleAttrValueList;
+
+    }
+
+    @Override
+    public List<BaseAttrInfo> getAttrList(List<String> ids) {
+        String attrValueIds = StringUtils.join(ids.toArray(), ",");
+
+        List<BaseAttrInfo> baseAttrInfoList = baseAttrInfoMapper.selectAttrInfoListByIds(attrValueIds);
+
+        return baseAttrInfoList;
 
     }
 }

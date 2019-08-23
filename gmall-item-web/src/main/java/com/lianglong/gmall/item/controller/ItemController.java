@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.lianglong.gmall.bean.SkuInfo;
 import com.lianglong.gmall.bean.SkuSaleAttrValue;
 import com.lianglong.gmall.bean.SpuSaleAttr;
+import com.lianglong.gmall.config.LoginRequire;
 import com.lianglong.gmall.service.ManageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,7 +19,7 @@ import java.util.Map;
 public class ItemController {
     @Reference
     private ManageService manageService;
-
+    @LoginRequire(autoRedirect = false)
     @RequestMapping("{skuId}.html")
     public String item(@PathVariable("skuId") String skuId, Map<String, Object> map) {
 

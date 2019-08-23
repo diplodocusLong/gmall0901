@@ -15,8 +15,32 @@
     <resultMap id="attrInfoMap" type="com.lianglong.gmall.bean.BaseAttrInfo" autoMapping="true">
 
         <id column="id" property="id"/>
+
         <collection property="attrValueList"  select="com.lianglong.gmall.manage.mapper.BaseAttrValueMapper.selectValueListByAttrId" column="id">
 
         </collection>
     </resultMap>
+
+
+    <select id="selectAttrInfoListByIds" resultMap="baseAttrInfoMap">
+        SELECT ai.id,ai.attr_name,ai.catalog3_id, av.id attr_value_id ,av.attr_id ,av.value_name
+        FROM base_attr_info ai INNER JOIN base_attr_value av ON ai.id=av.attr_id
+        WHERE av.id IN (${valueIds})
+    </select>
+    <resultMap id="baseAttrInfoMap" type="com.lianglong.gmall.bean.BaseAttrInfo" autoMapping="true">
+        <!--表示主键
+            property：实体类的属性名
+            column:通过sql语句查询出来的字段名
+            result：表示是普通字段
+        -->
+        <id property="id" column="id"></id>
+        <!--属性实体类中有属性值集合：1:n ofType:集合类型 -->
+        <collection property="attrValueList" ofType="com.lianglong.gmall.bean.BaseAttrValue" autoMapping="true">
+            <!--如果有属性名重复的话， 需要给{column}重命名-->
+            <id property="id" column="attr_value_id"></id>
+        </collection>
+
+    </resultMap>
+
+
 </mapper>

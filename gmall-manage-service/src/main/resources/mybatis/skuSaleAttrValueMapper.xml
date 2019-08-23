@@ -17,4 +17,6 @@
     <resultMap id="skuSaleAttrValueMap" type="com.lianglong.gmall.bean.SkuSaleAttrValue" autoMapping="true">
         <result property="id" column="id" ></result>
     </resultMap>
+
+
 </mapper>

@@ -104,4 +104,7 @@ public interface ManageService {
      * @return
      */
     public List<SkuSaleAttrValue> getSkuSaleAttrValueListBySpu(String spuId);
+
+
+    List<BaseAttrInfo> getAttrList(List<String> ids);
 }
